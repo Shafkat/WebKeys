@@ -19,34 +19,124 @@ capChars[2] = capRow3;
 
 
 head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js","./javascript/ui.js","./javascript/touch.js", function (){
-$("#touchme1, #touchme2, #touchme3, #touchme4, #touchme5, #touchme6").draggable({revert:true});
-	$("#drop1, #drop2, #drop3, #drop4").droppable({
+$('.touchBox').draggable({revert:true});
+	$(".dropArea").droppable({
     drop: function( event, ui ) {
-        show(this.id);
         //$(ui.draggable).remove();
-        $(this).css({'border':'#777 dashed 3px','background':'#eee'});
+        $(this).css({'border':'#777 solid 3px','background':'#eee'});
     },
     over: function(event, ui) {
-        $(this).css({'border':'#a33 dashed 3px','background':'#faa'});
+        $(this).css({'border':'#a33 solid 3px','background':'#faa'});
     },
     out: function (event, ui){
-        $(this).css({'border':'#777 dashed 3px','background':'#eee'});
+        $(this).css({'border':'#777 solid 3px','background':'#eee'});
     }
 	});
 });
-    
-    function show(id)
-    {
-        var gen_box = document.getElementById(id);
-        var gen_box_new = document.createElement('div');
-        
-        gen_box_new.setAttribute('class', 'droppedBox');
-        
-        gen_box.appendChild(gen_box_new);
-    }
-    
-    //Dynamically generate all the alphabets
-    function dynaAlpha()
-    {
-    	
-    }
+
+//Dynamically generate the table to hold the keys
+function loadStructure()
+{
+	var maincontainer = document.getElementById('main_container');
+	var dynaTable1 = document.createElement('table');
+	var dynaTable2 = document.createElement('table');
+	var dynaTable3 = document.createElement('table');
+	
+	var row1 = document.createElement('tr');
+	var row2 = document.createElement('tr');
+	var row3 = document.createElement('tr');
+	
+	$(dynaTable1).attr('id','main_table1');
+	$(dynaTable1).attr('align','center');
+
+	$(dynaTable2).attr('id','main_table2');
+	$(dynaTable2).attr('align','center');
+
+	$(dynaTable3).attr('id','main_table3');
+	$(dynaTable3).attr('align','center');
+	
+	$(row1).attr('id','main_table1_row1');
+	
+	$(row2).attr('id','main_table2_row2');
+	
+	$(row3).attr('id','main_table3_row3');
+	
+	maincontainer.appendChild(dynaTable1);
+	maincontainer.appendChild(dynaTable2);
+	maincontainer.appendChild(dynaTable3);
+
+	dynaTable1.appendChild(row1);
+	dynaTable2.appendChild(row2);
+	dynaTable3.appendChild(row3);
+	
+	loadKeys();
+}
+
+function loadKeys()
+{
+	var row1 = document.getElementById('main_table1_row1');
+	var row2 = document.getElementById('main_table2_row2');
+	var row3 = document.getElementById('main_table3_row3');
+	
+	$(row1).empty();
+	$(row2).empty();
+	$(row3).empty();
+	
+	var rows = [row1, row2, row3];
+	
+	for(var i = 0; i < smallChars.length; i++)
+	{
+		for(var j = 0; j < smallChars[i].length; j++)
+		{
+			var cell = document.createElement('td');
+			var key = document.createElement('div');
+			
+			$(key).attr('id', smallChars[i][j]);
+			$(key).attr('class', 'touchBox');
+			key.innerHTML = smallChars[i][j];
+			
+			rows[i].appendChild(cell);
+			cell.appendChild(key);
+		}
+	}
+	
+	head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js","./javascript/ui.js","./javascript/touch.js", function (){
+	$('.touchBox').draggable({revert:true});
+	});
+	
+}
+
+function loadKeysUpperCase()
+{
+	
+	var row1 = document.getElementById('main_table1_row1');
+	var row2 = document.getElementById('main_table2_row2');
+	var row3 = document.getElementById('main_table3_row3');
+
+	$(row1).empty();
+	$(row2).empty();
+	$(row3).empty();
+	
+	var rows = [row1, row2, row3];
+	
+	for(var i = 0; i < capChars.length; i++)
+	{
+		for(var j = 0; j < capChars[i].length; j++)
+		{
+			var cell = document.createElement('td');
+			var key = document.createElement('div');
+			
+			$(key).attr('id', capChars[i][j]);
+			$(key).attr('class', 'touchBox');
+			key.innerHTML = capChars[i][j];
+			
+			rows[i].appendChild(cell);
+			cell.appendChild(key);
+		}
+	}
+	
+	head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js","./javascript/ui.js","./javascript/touch.js", function (){
+	$('.touchBox').draggable({revert:true});
+	});
+	
+}
