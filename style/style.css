@@ -15,12 +15,20 @@ body {
 	font-weight:bold;
 }
 h1{
-	margin:5px 0;
+	text-align: center;
+	font-size: 3em;
 }
 #touchme1, #touchme2, #touchme3, #touchme4, #touchme5, #touchme6 {
 	cursor: move;
 	position:relative;
 	z-index:50;
+}
+
+#textBox
+{
+	margin: 25px;
+	height: 250px;
+	text-align: center;
 }
 
 .droppedBox

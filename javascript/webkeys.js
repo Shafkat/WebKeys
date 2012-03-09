@@ -1,6 +1,6 @@
 var smallRow1 = ['q','w','e','r','t','y','u','i','o','p'];
 var smallRow2 = ['a','s','d','f','g','h','j','k','l'];
-var smallRow3 = ['z','x','c','v','b','n','m'];
+var smallRow3 = ['SHIFT','z','x','c','v','b','n','m', 'SHIFT'];
 
 var smallChars = new Array();
 smallChars[0] = smallRow1;
@@ -9,7 +9,7 @@ smallChars[2] = smallRow3;
 
 var capRow1 = ['Q','W','E','R','T','Y','U','I','O','P'];
 var capRow2 = ['A','S','D','F','G','H','J','K','L'];
-var capRow3 = ['Z','X','C','V','B','N','M'];
+var capRow3 = ['Shift','Z','X','C','V','B','N','M','Shift'];
 
 var capChars = new Array();
 capChars[0] = capRow1;
@@ -95,6 +95,14 @@ function loadKeys()
 			$(key).attr('class', 'touchBox');
 			key.innerHTML = smallChars[i][j];
 			
+			if(smallChars[i][j] == "SHIFT"){
+				$(key).attr('onclick', 'loadKeysUpperCase();');
+			}
+			else
+			{
+				$(key).attr('onclick', 'writeTHIS(this.id.toString());');
+			}
+			
 			rows[i].appendChild(cell);
 			cell.appendChild(key);
 		}
@@ -130,6 +138,14 @@ function loadKeysUpperCase()
 			$(key).attr('class', 'touchBox');
 			key.innerHTML = capChars[i][j];
 			
+			if(capChars[i][j] == "Shift"){
+				$(key).attr('onclick', 'loadKeys();');
+			}
+			else
+			{
+				$(key).attr('onclick', 'writeTHIS(this.id.toString());');
+			}
+			
 			rows[i].appendChild(cell);
 			cell.appendChild(key);
 		}
@@ -139,4 +155,12 @@ function loadKeysUpperCase()
 	$('.touchBox').draggable({revert:true});
 	});
 	
+}
+
+function writeTHIS(text)
+{
+	var box = document.getElementById('textfield');
+	
+	box.innerHTML += text;
+
 }
