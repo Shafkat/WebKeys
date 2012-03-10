@@ -18,6 +18,12 @@ h1{
 	text-align: center;
 	font-size: 3em;
 }
+
+.chars
+{
+	font-size: 2em;
+}
+
 #touchme1, #touchme2, #touchme3, #touchme4, #touchme5, #touchme6 {
 	cursor: move;
 	position:relative;
@@ -27,7 +33,7 @@ h1{
 #textBox
 {
 	margin: 25px;
-	height: 250px;
+	height: 100px;
 	text-align: center;
 }
 
@@ -67,6 +73,25 @@ h1{
 	position:relative;
 	z-index:50;
 }
+
+#spacer
+{
+	width: 253px;
+	margin-left: 33%;
+}
+
+#delete
+{
+	width: 145px;
+	margin-left: 55%;
+}
+
+.keyLabel
+{
+	position: relative;
+	top: 35%;
+}
+
 .largetouchbox b, .dropArea b{
 	line-height: 40px;
 }
