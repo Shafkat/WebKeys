@@ -22,6 +22,7 @@ h1{
 .chars
 {
 	font-size: 2em;
+	font-family: 'Inconsolata', sans-serif;
 }
 
 #touchme1, #touchme2, #touchme3, #touchme4, #touchme5, #touchme6 {
@@ -77,13 +78,20 @@ h1{
 #spacer
 {
 	width: 253px;
-	margin-left: 33%;
+	margin-left: 30%;
+
 }
 
 #delete
 {
-	width: 145px;
-	margin-left: 55%;
+	width: 60px;
+	margin-left: 125%;
+}
+
+#return
+{
+	width: 60px;
+	margin-left: 110%;
 }
 
 .keyLabel

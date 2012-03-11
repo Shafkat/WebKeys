@@ -88,12 +88,10 @@ function loadKeys()
 	var row1 = document.getElementById('main_table1_row1');
 	var row2 = document.getElementById('main_table2_row2');
 	var row3 = document.getElementById('main_table3_row3');
-	var row4 = document.getElementById('main_table3_row4');
 	
 	$(row1).empty();
 	$(row2).empty();
 	$(row3).empty();
-	$(row4).empty();
 	
 	var rows = [row1, row2, row3];
 	
@@ -113,11 +111,12 @@ function loadKeys()
 			keyName.setAttribute('class', 'keyLabel');
 			
 			if(state == 'low' && smallChars[i][j] == 'Shift'){
-				$(key).attr('onclick', 'loadKeysUpperCase();');
+				$(key).attr('ontouchstart', 'loadKeysUpperCase();');
 			}
 			else
 			{
-				$(key).attr('onclick', 'writeTHIS(this.id.toString());');
+				$(key).attr('ontouchstart', 'writeTHIS(this.id.toString());');
+				$(key).attr('ontouchend', '$("#"+this.id.toString()).css("background-color","#999")');
 			}
 			
 			key.appendChild(keyName);
@@ -126,27 +125,7 @@ function loadKeys()
 		}
 	}
 	
-	var cellSpace = document.createElement('td');
-	var cellDelete = document.createElement('td');
-	
-	var space = document.createElement('div');
-	space.setAttribute('class', 'touchBox');
-	space.setAttribute('id', 'spacer');
-	space.innerHTML = 'Space';
-	space.setAttribute('onclick', 'writeTHIS(" ");');
-	
-	var del = document.createElement('div');
-	del.setAttribute('class', 'touchBox');
-	del.setAttribute('id', 'delete');
-	del.innerHTML = 'Delete';
-	del.setAttribute('onclick', 'deleteTHIS();');
-	
-	row4.appendChild(cellSpace);
-	row4.appendChild(cellDelete);
-	
-	cellSpace.appendChild(space);
-	
-	cellDelete.appendChild(del);
+	bottomRow();
 	
 	head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js","./javascript/ui.js","./javascript/touch.js", function (){
 	$('.touchBox').draggable({revert:true});
@@ -161,12 +140,10 @@ function loadKeysUpperCase()
 	var row1 = document.getElementById('main_table1_row1');
 	var row2 = document.getElementById('main_table2_row2');
 	var row3 = document.getElementById('main_table3_row3');
-	var row4 = document.getElementById('main_table3_row4');
 
 	$(row1).empty();
 	$(row2).empty();
 	$(row3).empty();
-	$(row4).empty();
 	
 	var rows = [row1, row2, row3];
 	
@@ -186,11 +163,12 @@ function loadKeysUpperCase()
 			keyName.setAttribute('class', 'keyLabel');
 			
 			if(state == 'up' && capChars[i][j] == 'Shift'){
-				$(key).attr('onclick', 'loadKeys();');
+				$(key).attr('ontouchstart', 'loadKeys();');
 			}
 			else
 			{
-				$(key).attr('onclick', 'writeTHIS(this.id.toString());');
+				$(key).attr('ontouchstart', 'writeTHIS(this.id.toString());');
+				$(key).attr('ontouchend', '$("#"+this.id.toString()).css("background-color","#999")');
 			}
 			
 			key.appendChild(keyName);
@@ -199,48 +177,82 @@ function loadKeysUpperCase()
 		}
 	}
 	
+	bottomRow();
+	
 	head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js","./javascript/ui.js","./javascript/touch.js", function (){
 	$('.touchBox').draggable({revert:true});
 	});
 	
+}
+
+function writeTHIS(text)
+{
+	$("#"+text).css("background-color","#000000");
+
+	var box = document.getElementById('textfield');
+	
+	if(text == 'spacer')
+	{
+		box.innerHTML += ' ';
+	}
+	else if(text == 'return')
+	{
+		box.innerHTML += '<br />';
+	}
+	else if(text == 'delete')
+	{
+		var str = box.innerHTML;
+		var newStr = str.substring(0, str.length-1);
+		box.innerHTML = '';
+		box.innerHTML = newStr;
+	}
+	else
+	{
+		box.innerHTML += text;
+	}
+
+}
+
+function bottomRow()
+{
 	var cellSpace = document.createElement('td');
 	var cellDelete = document.createElement('td');
+	var cellReturn = document.createElement('td');
+	var row4 = document.getElementById('main_table3_row4');
+	
+	$(row4).empty();
 	
 	var space = document.createElement('div');
 	space.setAttribute('class', 'touchBox');
 	space.setAttribute('id', 'spacer');
 	space.innerHTML = 'Space';
-	space.setAttribute('onclick', 'writeTHIS(" ");');
+	space.setAttribute('ontouchstart', 'writeTHIS(this.id.toString());');
+	
+	space.setAttribute('ontouchend', '$("#"+this.id.toString()).css("background-color","#999")');
 	
 	var del = document.createElement('div');
 	del.setAttribute('class', 'touchBox');
 	del.setAttribute('id', 'delete');
 	del.innerHTML = 'Delete';
-	del.setAttribute('onclick', 'deleteTHIS();');
+	del.setAttribute('ontouchstart', 'writeTHIS(this.id.toString());');
+
+	del.setAttribute('ontouchend', '$("#"+this.id.toString()).css("background-color","#999")');
+
+	var returnKey = document.createElement('div');
+	returnKey.setAttribute('class', 'touchBox');
+	returnKey.setAttribute('id', 'return');
+	returnKey.innerHTML = 'Return';
+	returnKey.setAttribute('ontouchstart', 'writeTHIS(this.id.toString());');
+	
+	returnKey.setAttribute('ontouchend', '$("#"+this.id.toString()).css("background-color","#999")');
 	
 	row4.appendChild(cellSpace);
+	row4.appendChild(cellReturn);
 	row4.appendChild(cellDelete);
 	
 	cellSpace.appendChild(space);
 	
 	cellDelete.appendChild(del);
 	
-}
-
-function writeTHIS(text)
-{
-	var box = document.getElementById('textfield');
-	
-	box.innerHTML += text;
-
-}
-
-function deleteTHIS()
-{
-	var box = document.getElementById('textfield');
-	
-	var str = box.innerHTML;
-	var newStr = str.substring(0, str.length-1);
-	box.innerHTML = '';
-	box.innerHTML = newStr;
+	cellReturn.appendChild(returnKey);
 }
