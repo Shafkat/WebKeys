@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="apple-touch-fullscreen" content="yes" />
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <title>~WebKeys~</title>
+        <script type="text/javascript" src="./javascript/webkeys.js"></script>
+        <link rel="stylesheet" type="text/css" href="./style/style.css" />
+        
+    </head>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>~WebKeys~</title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="./javascript/head.min.js"></script>
-    <script type="text/javascript" src="./javascript/webkeys.js"></script>
-    <link rel="stylesheet" type="text/css" href="./style/style.css" />
-    <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-    
-</head>
+    <body onload="loadKeys( _capsKeyArray );" >
+    	
+    	<h1>\.WebKeys./</h1>
 
-<body onload="loadStructure();">
-	
-	<h1>\.WebKeys./</h1>
+    	<div id="textBox" >
+            <b>Your Text:</b>
+            <br>
+            <p id="textArea" contenteditable="true" ></p>
+    	</div>
 
-	<div id="textBox"><b>Your Text:</b>
-		<div id="textfield" class="chars"></div>
-	</div>
+    	<div id="main_container" >
+            <div  class="leftKeys" >
+                <Table id="LeftKeyTable" >
+                </Table>
+            </div>
+            <div class="rightKeys" >
+                <Table id="RightKeyTable" >
+                </Table>
+            </div>
+    	</div>
 
-	<div id="main_container">
-	</div>
-
-</body>
+    </body>
 </html>
